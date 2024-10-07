@@ -14,6 +14,10 @@ import mapbd.Saber;
  */
 public class SaberB extends javax.swing.JFrame {
 
+    static int audit, ident, visual;
+    //static int contsa, ident;
+    static String aluno;
+
     /**
      * Creates new form SaberB
      */
@@ -77,6 +81,8 @@ public class SaberB extends javax.swing.JFrame {
         rbSim10 = new javax.swing.JRadioButton();
         rbNao10 = new javax.swing.JRadioButton();
         bntEnviarSB = new javax.swing.JButton();
+        lblAluno = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -210,6 +216,10 @@ public class SaberB extends javax.swing.JFrame {
             }
         });
 
+        lblAluno.setText("Aluno");
+
+        lblId.setText("jLabel16");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -219,7 +229,9 @@ public class SaberB extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(190, 190, 190)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53)
+                        .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -299,20 +311,27 @@ public class SaberB extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 387, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(rbSim10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbNao10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(rbSim10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(rbNao10, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(48, 48, 48)
                         .addComponent(bntEnviarSB)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(lblAluno))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -378,7 +397,8 @@ public class SaberB extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(rbSim10)
                             .addComponent(rbNao10))
-                        .addGap(0, 23, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(lblId))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bntEnviarSB)
@@ -421,13 +441,22 @@ public class SaberB extends javax.swing.JFrame {
             contsb++;
         }
         
-        //int auditivo = contsb;
-        Saber s1 = new Saber();
-        s1.setAuditivo(contsb);
+        int audit = contsb;
+        //Saber s1 = new Saber();
+        //s1.setAuditivo(contsb);
         
-        System.out.println("Auditivo: " + s1.getAuditivo());
-        
+        System.out.println("Auditivo: " + audit);
+        System.out.println("Id: " + ident);
         new SaberC().setVisible(true);
+        String aluno = lblAluno.getText();
+        int ident = Integer.parseInt(lblId.getText());
+        SaberC.ident = Integer.parseInt(lblId.getText()); 
+        SaberC.aluno = lblAluno.getText();
+        SaberC.lblAluno.setText(aluno); 
+        SaberC.lblId.setText(String.valueOf(ident));
+
+        SaberC.visual = SaberB.visual;
+        SaberC.auditivo = contsb;
         dispose();
     }//GEN-LAST:event_bntEnviarSBActionPerformed
 
@@ -494,6 +523,8 @@ public class SaberB extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    public static javax.swing.JLabel lblAluno;
+    public static javax.swing.JLabel lblId;
     private javax.swing.JRadioButton rbNao1;
     private javax.swing.JRadioButton rbNao10;
     private javax.swing.JRadioButton rbNao2;

@@ -1,5 +1,9 @@
 package com.mycompany.canvasbeeapp;
 
+import javax.swing.JOptionPane;
+import mapbd.AtitudeColab;
+import objetoacesso.AtitudeColabDAO;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -10,7 +14,8 @@ package com.mycompany.canvasbeeapp;
  * @author lucim
  */
 public class Colaboracao extends javax.swing.JFrame {
-
+    static int ident;
+    static String aluno;
     /**
      * Creates new form Colaboracao
      */
@@ -65,6 +70,8 @@ public class Colaboracao extends javax.swing.JFrame {
         jSliderComClara = new javax.swing.JSlider();
         jLabel14 = new javax.swing.JLabel();
         lblComClara = new javax.swing.JLabel();
+        lblAluno = new javax.swing.JLabel();
+        lblId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -162,6 +169,11 @@ public class Colaboracao extends javax.swing.JFrame {
         bntEnviar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         bntEnviar.setForeground(new java.awt.Color(255, 255, 255));
         bntEnviar.setText("Enviar");
+        bntEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntEnviarActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("(0 = nenhuma habilidade - 5 = habilidade excelente)");
 
@@ -171,6 +183,11 @@ public class Colaboracao extends javax.swing.JFrame {
         jSliderHabilidade.setPaintTicks(true);
         jSliderHabilidade.setSnapToTicks(true);
         jSliderHabilidade.setValue(3);
+        jSliderHabilidade.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderHabilidadeStateChanged(evt);
+            }
+        });
 
         lblHabilidade.setText("3");
 
@@ -180,10 +197,19 @@ public class Colaboracao extends javax.swing.JFrame {
         jSliderComClara.setPaintTicks(true);
         jSliderComClara.setSnapToTicks(true);
         jSliderComClara.setValue(3);
+        jSliderComClara.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSliderComClaraStateChanged(evt);
+            }
+        });
 
         jLabel14.setText("(0 = nenhuma clareza - 5 = muita clareza)");
 
         lblComClara.setText("3");
+
+        lblAluno.setText("jLabel15");
+
+        lblId.setText("jLabel15");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -265,88 +291,167 @@ public class Colaboracao extends javax.swing.JFrame {
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(lblId, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(108, 108, 108))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(bntEnviar)
-                        .addGap(91, 91, 91))))
+                        .addGap(91, 91, 91))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim1)
-                    .addComponent(rbNao1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim2)
-                    .addComponent(rbNao2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim3)
-                    .addComponent(rbNao3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim4)
-                    .addComponent(rbNao4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim5)
-                    .addComponent(rbNao5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbSim6)
-                    .addComponent(rbNao6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSliderHabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblHabilidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSliderComClara, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblComClara)
-                        .addGap(11, 11, 11)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bntEnviar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(lblAluno))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim1)
+                            .addComponent(rbNao1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim2)
+                            .addComponent(rbNao2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim3)
+                            .addComponent(rbNao3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim4)
+                            .addComponent(rbNao4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim5)
+                            .addComponent(rbNao5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbSim6)
+                            .addComponent(rbNao6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSliderHabilidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblHabilidade))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSliderComClara, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblComClara)
+                                .addGap(11, 11, 11)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bntEnviar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblId)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bntEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntEnviarActionPerformed
+        String colaboracao, comunic, confort, confianca, qualid, autoest;
+        
+        if (rbSim1.isSelected()){
+            colaboracao = "sim";
+        } else
+            colaboracao = "não";
+        if (rbSim2.isSelected()){
+            comunic = "sim";
+        } else
+            comunic = "não";
+        
+        if (rbSim3.isSelected()){
+            confort = "sim";
+        } else
+            confort = "não";
+        
+        if (rbSim4.isSelected()){
+            confianca = "sim";
+        } else
+            confianca = "não";
+        
+        if (rbSim5.isSelected()){
+            qualid = "sim";
+        } else
+            qualid = "não";
+        
+        if (rbSim6.isSelected()){
+            autoest = "sim";
+        } else
+            autoest = "não";
+        int trab_equipe = Integer.parseInt(lblHabilidade.getText());
+        int comun_clara = Integer.parseInt(lblComClara.getText());
+        int id_aluno = Integer.parseInt(lblId.getText());
+        
+        AtitudeColab atitude = new AtitudeColab();
+        atitude.setColaborar(colaboracao);
+        atitude.setComunicacao(comunic);
+        atitude.setConfortavel(confort);
+        atitude.setConfianca(confianca);
+        atitude.setQualidade(qualid);
+        atitude.setAutoestima(autoest);
+        atitude.setTrab_equipe(trab_equipe);
+        atitude.setComun_clara(comun_clara);
+        atitude.setId_aluno(id_aluno);
+        
+        AtitudeColabDAO atitudeDAO = new AtitudeColabDAO();
+        atitudeDAO.inserir(atitude);
+        
+        JOptionPane.showMessageDialog(null,"Agradecemos sua participação!");
+        
+        new Senac().setVisible(true);
+        Senac.aluno = lblAluno.getText();
+        Senac.lblAluno.setText(aluno);
+        Senac.lblid.setText(String.valueOf(ident));
+        dispose();
+    }//GEN-LAST:event_bntEnviarActionPerformed
+
+    private void jSliderHabilidadeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderHabilidadeStateChanged
+        int valor_hab = jSliderHabilidade.getValue();
+        lblHabilidade.setText(String.valueOf(valor_hab));
+    }//GEN-LAST:event_jSliderHabilidadeStateChanged
+
+    private void jSliderComClaraStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderComClaraStateChanged
+        int valor_comclara = jSliderComClara.getValue();
+        lblComClara.setText(String.valueOf(valor_comclara));
+    }//GEN-LAST:event_jSliderComClaraStateChanged
 
     /**
      * @param args the command line arguments
@@ -408,8 +513,10 @@ public class Colaboracao extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSliderComClara;
     private javax.swing.JSlider jSliderHabilidade;
-    private javax.swing.JLabel lblComClara;
-    private javax.swing.JLabel lblHabilidade;
+    public static javax.swing.JLabel lblAluno;
+    public static javax.swing.JLabel lblComClara;
+    public static javax.swing.JLabel lblHabilidade;
+    public static javax.swing.JLabel lblId;
     private javax.swing.JRadioButton rbNao1;
     private javax.swing.JRadioButton rbNao2;
     private javax.swing.JRadioButton rbNao3;

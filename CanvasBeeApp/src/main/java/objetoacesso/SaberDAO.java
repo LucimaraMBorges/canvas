@@ -16,7 +16,7 @@ import mapbd.Saber;
 public class SaberDAO {
     private Conexao conexao;
     private Connection conn;
-
+    public int ident;
     public SaberDAO() {
         this.conexao = new Conexao();
         this.conn = this.conexao.getConexao();
@@ -32,7 +32,7 @@ public class SaberDAO {
             stmt.setInt(2, saber.getAuditivo());
             stmt.setInt(3, saber.getCinestesico());
             stmt.setString(4, saber.getPredominancia());
-            //stmt.setInt(5, alunos.getid_aluno());
+            stmt.setInt(5, saber.getId_aluno());
             
         }catch (Exception e) {
             System.out.println("Erro ao inserir fase 2: " + e.getMessage());

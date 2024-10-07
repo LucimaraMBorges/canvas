@@ -4,6 +4,7 @@
  */
 package com.mycompany.canvasbeeapp;
 
+import javax.swing.JOptionPane;
 import mapbd.Alunos;
 import objetoacesso.AlunosDAO;
 
@@ -203,7 +204,10 @@ public class Cadastro extends javax.swing.JFrame {
         txtUsuario.setText("");
         txtSenha.setText("");
         txtEmail.setText("");
+        JOptionPane.showMessageDialog(null,"Cadastro realizado com sucesso!");
         
+        new Inicio().setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_bntSalvarActionPerformed
 

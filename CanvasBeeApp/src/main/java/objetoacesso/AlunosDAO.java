@@ -4,6 +4,8 @@
  */
 package objetoacesso;
 
+import com.mycompany.canvasbeeapp.SaberA;
+import com.mycompany.canvasbeeapp.Senac;
 import conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +21,8 @@ import mapbd.Alunos;
 public class AlunosDAO {
 private Conexao conexao;
 private Connection conn;
+public int ident;
+public String aluno;
 //Contrutor
 public AlunosDAO(){
     this.conexao = new Conexao();
@@ -53,6 +57,20 @@ public ResultSet autenticar(Alunos alunos){
         stmt.setString(1, alunos.getUsuario());
         stmt.setString(2, alunos.getSenha());
         ResultSet rs = stmt.executeQuery();
+        //se usuário e senha correspondente
+        if(rs.next()){
+            Senac tela = new Senac();
+            tela.setVisible(true);
+            Senac.lblid.setText(rs.getString(1));
+            //Senac.txtid.setText(rs.getString(1));
+            Senac.lblAluno.setText(rs.getString(2));
+            int ident = Integer.parseInt(rs.getString(1));
+            String aluno = (rs.getString(2));
+        }else {
+            
+                JOptionPane.showMessageDialog(null,"usuario e/ou senha inválidos");
+
+        }
         return rs;
         
     }catch(SQLException erro){

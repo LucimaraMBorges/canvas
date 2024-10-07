@@ -9,7 +9,8 @@ package com.mycompany.canvasbeeapp;
  * @author lucim
  */
 public class Senac extends javax.swing.JFrame {
-
+    static int ident;
+    static String aluno;
     /**
      * Creates new form Senac
      */
@@ -36,6 +37,7 @@ public class Senac extends javax.swing.JFrame {
         btnColaboracao = new javax.swing.JButton();
         btnConquistas = new javax.swing.JButton();
         lblAluno = new javax.swing.JLabel();
+        lblid = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,7 +59,7 @@ public class Senac extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,6 +125,12 @@ public class Senac extends javax.swing.JFrame {
             }
         });
 
+        lblAluno.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAluno.setForeground(new java.awt.Color(0, 0, 153));
+        lblAluno.setText("Aluno");
+
+        lblid.setText("id");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -146,16 +154,19 @@ public class Senac extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20))))
+                        .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblid, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
-                .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel3)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,7 +175,9 @@ public class Senac extends javax.swing.JFrame {
                     .addComponent(btnNucInovacao)
                     .addComponent(btnColaboracao)
                     .addComponent(btnConquistas))
-                .addGap(0, 258, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addComponent(lblid)
+                .addGap(68, 68, 68))
         );
 
         pack();
@@ -172,17 +185,36 @@ public class Senac extends javax.swing.JFrame {
 
     private void btnInterdisciplinarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInterdisciplinarActionPerformed
         new InterdisciplinarE().setVisible(true);
+        String aluno = lblAluno.getText();
+        int ident = Integer.parseInt(lblid.getText());
+        InterdisciplinarE.ident = Integer.parseInt(lblid.getText()); 
+        InterdisciplinarE.aluno = lblAluno.getText();
+        InterdisciplinarE.lblAluno.setText(aluno); 
+        InterdisciplinarE.lblId.setText(String.valueOf(ident));
         
     }//GEN-LAST:event_btnInterdisciplinarActionPerformed
 
     private void btnColaboracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColaboracaoActionPerformed
         new Colaboracao().setVisible(true);
-        
+        String aluno = lblAluno.getText();
+        int ident = Integer.parseInt(lblid.getText());
+        Colaboracao.ident = Integer.parseInt(lblid.getText());
+        Colaboracao.aluno = lblAluno.getText();
+        Colaboracao.lblAluno.setText(aluno);
+        Colaboracao.lblId.setText(String.valueOf(ident));
     }//GEN-LAST:event_btnColaboracaoActionPerformed
 
     private void btnSaberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaberActionPerformed
+              
         new SaberA().setVisible(true);
-               //dispose();
+        String aluno = lblAluno.getText();
+        int ident = Integer.parseInt(lblid.getText());
+        SaberA.ident = Integer.parseInt(lblid.getText()); 
+        SaberA.aluno = lblAluno.getText();
+        SaberA.lblAluno.setText(aluno); 
+        SaberA.lblId.setText(String.valueOf(ident));
+        
+        //dispose();
     }//GEN-LAST:event_btnSaberActionPerformed
 
     private void btnConquistasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConquistasActionPerformed
@@ -192,6 +224,13 @@ public class Senac extends javax.swing.JFrame {
 
     private void btnNucInovacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNucInovacaoActionPerformed
         new NucInovacao().setVisible(true);
+        String aluno = lblAluno.getText();
+        int ident = Integer.parseInt(lblid.getText());
+        NucInovacao.ident = Integer.parseInt(lblid.getText());
+        NucInovacao.aluno = lblAluno.getText();
+        NucInovacao.lblAluno.setText(aluno);
+        NucInovacao.lblId.setText(String.valueOf(ident));
+        
         
     }//GEN-LAST:event_btnNucInovacaoActionPerformed
 
@@ -240,6 +279,7 @@ public class Senac extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblAluno;
+    public static javax.swing.JLabel lblAluno;
+    public static javax.swing.JLabel lblid;
     // End of variables declaration//GEN-END:variables
 }
